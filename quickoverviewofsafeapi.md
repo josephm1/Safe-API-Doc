@@ -14,11 +14,9 @@ Colour  |Orange   | Blue   |  Green
 
 // end ignore
 
-The data on the safe network is saved as a key-value store. This a means requested data from the network will return something like this `key 1: value 1`. This is called an entry.
-
 There are only two generic types of data on the safe network, Mutable Data (can change) and Immutable Data (can't change).  
 
-Mutable Data is subject to some limits, it cannot hold more than a 100 entries and the Mutable Data Structure itself must remain under 1 MB in size. Mutable Data has some abilities in particular the ability to set permissions, this means you can enable the ability to insert, update or delete entries in the Mutable Data structure for yourself, a particular person or everyone. To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it your app handle, a 32 length buffer (this can be a hash of a particular string with safeCrypto.sha3Hash function) and its type tag.
+Mutable Data is subject to some limits, it cannot hold more than a 100 entries and the Mutable Data Structure itself must remain under 1 MB in size. Mutable Data has some abilities in particular the ability to set permissions, this means you can enable the ability to insert, update or delete entries in the Mutable Data structure for yourself, a particular person or everyone. To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it your app handle, a 32 length buffer (this can be a hash of a particular string with safeCrypto.sha3Hash function) and its type tag.The Mutable Data data on the safe network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry.
 
 // Needs to be verified
 
