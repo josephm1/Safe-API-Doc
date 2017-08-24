@@ -20,7 +20,7 @@ Mutable Data is subject to some limits, it cannot hold more than a 100 entries a
 
 // Needs to be verified
 
-Immutable Data can only hold one entry, but its size is limited only by the current Testnet restrictions or when the network is fully released the amount of SAFEcoin you have. Immutable Data has the ability to be encrypted with both asymmetric and symmetric encryption. Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone.
+Immutable Data can only hold one value, but its size is limited only by the current Testnet restrictions or when the network is fully released the amount of SAFEcoin you have. Immutable Data has the ability to be encrypted with both asymmetric and symmetric encryption. Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone.
 
 //Needs to be explained better, why it's used, how it works and verified to be make sure it's right
 // this is a good reference https://blog.maidsafe.net/2016/05/27/structuring-networks-with-xor/
@@ -41,7 +41,7 @@ I'll like to think of XOR as the numbers canceling each other out. 0 is nothing 
 // Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults.
 
 It is possible to combine the advantages of the these two data types into an emulation file system on top of the network called NFS (Network File Storage). A file will be uploaded to the SAFE
-Network using Immutable Data with its key being the file name and value being the file content. Then a new Mutable Data entry is created with the file name being its key and the Data Map Address of the Immutable Data file as its value. Since we are using Mutable Data to reference the file we are able to update the file by creating another Immutable Data entry and using its Data Map Address as the new value in our Mutable Data Structure. This Mutable Data Structure can be used again to store more NFS files.
+Network using Immutable Data with its value being the file content. Then a new Mutable Data entry is created with the file name being its key and the Data Map Address of the Immutable Data file as its value. Since we are using Mutable Data to reference the file we are able to update the file by creating another Immutable Data entry and using its Data Map Address as the new value in our Mutable Data Structure. This Mutable Data Structure can be used again to store more NFS files.
 
 We are now going to look at how the Web Hosting Manager.
 
