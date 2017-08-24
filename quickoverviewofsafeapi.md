@@ -25,7 +25,7 @@ Mutable Data is subject to some limits, it cannot hold more than a 100 entries a
 Immutable Data can only hold one entry, but its size is limited only by the current Testnet restrictions or when the network is fully released the amount of SAFEcoin you have. Immutable Data has the ability to be encrypted with both asymmetric and symmetric encryption. Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone.
 
 //Needs to be explained better, why it's used, how it works and verified to be make sure it's right
-// this is a good reference https://blog.maidsafe.net/2016/05/27/structuring-networks-with-xor/ for nodes in the SAFE Network
+// this is a good reference https://blog.maidsafe.net/2016/05/27/structuring-networks-with-xor/
 
 This done by using XOR (Exclusive Or, ⊕). Here is a quick rundown of XOR in the SAFE Network.
 
