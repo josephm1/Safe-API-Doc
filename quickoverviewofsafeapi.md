@@ -33,6 +33,7 @@ A  | B  |C |
 0  | 1 | 1
 1  | 0 | 1
 1  | 1 | 0
+
 **A ⊕ B (The **XOR** distance of A and B) == C**
 
 I'll like to think of XOR as the numbers canceling each other out. 0 is nothing so 0 canceling 0 is also nothing. 1 against 0, 0 is still nothing so 1 wins. 1 and 1 equal each other, therefore when they cancel each other out you are left with nothing, 0.
