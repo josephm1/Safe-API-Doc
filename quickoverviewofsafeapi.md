@@ -40,7 +40,7 @@ A  | B  |C |
 1  | 0 | 1
 1  | 1 | 0
 
-######A ⊕ B (The **XOR** distance of A and B) == C
+###### A ⊕ B (The **XOR** distance of A and B) == C
 
 // Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults.
 
