@@ -1,10 +1,10 @@
 # A rundown of the SAFE API
 
 ### SAFE Browser and the Authenticator
-The SAFE Browser is developed by MaidSafe and provides access to SAFE Network and websites on the SAFE Network. It has an integrated feature called Authenticator. The Authenticator is used to for logging in and creating an account on the SAFE Network.
+The SAFE Browser is developed by MaidSafe and provides access to SAFE Network and websites on the SAFE Network. It has an integrated feature called Authenticator. The Authenticator is used to for signing in and creating an account on the SAFE Network.
 
 #### SAFE Accounts
-An account on the SAFE Network is needed for storing data and committing data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each write action preformed on the Network will cost a PUT or maybe more if you are uploading files. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented. Please note actions such as reading from the SAFE Network such as accessing a website do not cost any PUTS and don't even require you to be signed in to your SAFE Account.
+An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each write action preformed on the Network will cost a PUT or maybe more if you are uploading files. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented. Please note reading data from the SAFE Network such as accessing a website do not cost any PUTS and don't even require you to be signed in to your SAFE Account.
 
 
 #### SAFE API Basic functions
@@ -61,7 +61,7 @@ Network using Immutable Data with its value being the file content. Then a new M
 
 ###### Hierarchy File-System Emulation
 
- When dealing with folders and files being uploaded that are within subdirectories it is recommended to use a slash (/) to separate the subdirectory and the file name. This means the key of the Mutable Data will look something like this: `filepath/subdir/index.html`.
+ When dealing with folders and files being uploaded that are within subdirectories it is recommended to use a slash (/) to separate the subdirectory and the file name. This means the key of the Mutable Data could look something like this: `filepath/subdir/index.html`.
 
 ## Containers
 // More info here and great reference  https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md
@@ -75,11 +75,11 @@ The root container is the main entry point for the user and most apps to interac
 
 // Session Packet
 
-Secondly, the authenticator has another mapped data container which holds the encryption keys per each container, which is locally encrypted with a separate key that only the authenticator has access to and will never be shared. That is called the: `RootKeysContainer`.
+Secondly, the authenticator has another mapped data container which holds the encryption keys per each container, which is locally encrypted with a separate key that only the authenticator has access to and will never be shared. This is called: `RootKeysContainer`.
 
 ####  Default containers
 
-The authenticator will create the following default containers within the root container, each one with its own random network address:
+The authenticator will create the following default containers within the root container when you create an account, each one with its own random network address:
 
 - \_apps/net.maidsafe.authenticator/
 - \_documents
@@ -91,7 +91,7 @@ The authenticator will create the following default containers within the root c
 - \_publicNames
 
 ####  App container
-The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name will look like `apps/id.example.net`.
+The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name will look something like `apps/id.example.net`.
 
 ### We will now take a look at some of MaidSafe's Applications.
 
