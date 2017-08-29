@@ -34,7 +34,7 @@ Mutable Data is subject to some limits, it cannot hold more than a 100 entries a
 ### Immutable Data
 // Needs to be verified
 
-Immutable Data can only hold one value, but its size is limited only by the current Test Network restrictions or when the network is fully released the amount of SAFE Coin you have. Immutable Data has the ability to be encrypted with both asymmetric and symmetric encryption. Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone. This is done by using XOR.
+Immutable Data can only hold one value, but its size is only limited by the current Test Network restrictions or when the network is fully released the amount of SAFE Coin you have. Immutable Data has the ability to be encrypted with both asymmetric and symmetric encryption. Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone. This is done by using XOR.
 
 #### Exclusive Or (XOR)
 //Needs to be explained better, why it's used, how it works and verified to be make sure it's right
@@ -115,9 +115,11 @@ Demoy was designed to showcase the Mutable Data functions. It works by using its
 
 // More resources here
 
-https://www.youtube.com/watch?v=4yIRrn2e-9E safe demo overview
-https://www.youtube.com/watch?v=IySa5RB9iCE main.js rundown
-https://github.com/josephm1/Demoy/blob/master/main.js javascript file
+https://www.youtube.com/watch?v=4yIRrn2e-9E Demoy overview
+
+https://www.youtube.com/watch?v=IySa5RB9iCE javascript file rundown
+
+https://github.com/josephm1/Demoy Demoy's Github
 
 ### Chaty
 ### Vidy
