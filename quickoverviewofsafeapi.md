@@ -29,7 +29,7 @@ There are only two generic types of data on the safe network, Mutable Data (can 
 ### Mutable Data
 // Needs to be verified
 
-Mutable Data is subject to some limits, it cannot hold more than a 100 entries and the Mutable Data Structure itself must remain under 1 MB in size. Mutable Data has some abilities in particular the ability to set permissions, this means you can enable the ability to insert, update or delete entries in the Mutable Data structure for yourself, a particular person or everyone. To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it your app handle, a 32 length buffer (this can be a hash of a particular string with safeCrypto.sha3Hash function) and its type tag. The Mutable Data on the safe network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry.
+Mutable Data is subject to some limits, it cannot hold more than a 100 entries and the Mutable Data Structure itself must remain under 1 MB in size. Mutable Data has some abilities in particular the ability to set permissions, this means you can enable the ability to insert, update or delete entries in the Mutable Data structure for yourself, a particular person or everyone. To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag. The Mutable Data on the safe network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry.
 
 ### Immutable Data
 // Needs to be verified
@@ -66,10 +66,10 @@ Network using Immutable Data with its value being the file content. Then a new M
 ## Containers
 // More info here and great reference  https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md
 
-Containers are Mutable Data Structures that are used mainly for storing particular types of data i.e. \_music stores music and sound files.
+Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores music and sound files.
 
 ### Root Container
-// Needs to be verified
+// Could be made simpler
 
 The root container is the main entry point for the user and most apps to interact with. It is a locally encrypted container stored at a random location on the network known only to the user, that generally only the authenticator has write access to. Its reference will be stored in the users session packet on account creation. Keys starting with an underscore (\_) are reserved for internal usage by the authenticator, while the authenticator may also allow the creation of other keys later.
 
@@ -81,14 +81,14 @@ Secondly, the authenticator has another mapped data container which holds the en
 
 The authenticator will create the following default containers within the root container when you create an account, each one with its own random network address:
 
-- \_apps/net.maidsafe.authenticator/
-- \_documents
-- \_downloads
-- \_music
-- \_pictures
-- \_videos
-- \_public
-- \_publicNames
+- `_apps/net.maidsafe.authenticator/`
+- `_documents`
+- `_downloads`
+- `_music`
+- `_pictures`
+- `_videos`
+- `_public`
+- `_publicNames`
 
 ###  App container
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name will look something like `apps/id.example.net`.
@@ -98,10 +98,7 @@ The app container is created for websites if they request their to have own cont
 ### Web Hosting Manager
 // Needs to be verified
 
-The Web Hosting Manager will first create a Public ID. This is a Public Mutable Data Structure with the Hash of the string you give it and the type tag of 15001, this Public ID can be used again in other websites and applications such as the SAFE Email App. Then you will be asked to create a Web Service Name. Once you enter in a name a new random (this buffer is created randomly so you don't pass any strings to it) Public Mutable Data Structure with a type tag of 15002 will be created, this will be used for all our NFS files for this website and its Random Mutable Data Name will be saved. Then a new entry will be created and saved to our Public ID's Mutable Data Structure with the Web Service Name as its key and the Random Mutable Data name as its value. Once you upload an index.html to your web service you will be then able to navigate to your own website, it will have a URL which looks something like this:
-```
-safe://servicename.publicid
-```
+The Web Hosting Manager will first create a Public ID. This is a Public Mutable Data Structure with the Hash of the string you give it and the type tag of 15001, this Public ID can be used again in other websites and applications such as the SAFE Email App. Then you will be asked to create a Web Service Name. Once you enter in a name a new random (this buffer is created randomly so you don't pass any strings to it) Public Mutable Data Structure with a type tag of 15002 will be created, this will be used for all our NFS files for this website and its Random Mutable Data Name will be saved. Then a new entry will be created and saved to our Public ID's Mutable Data Structure with the Web Service Name as its key and the Random Mutable Data name as its value. Once you upload an index.html to your web service you will be then able to navigate to your own website, it will have a URL which looks something like this: `safe://servicename.publicid`
 ### SAFE Browser
 // Needs to be verified
 
