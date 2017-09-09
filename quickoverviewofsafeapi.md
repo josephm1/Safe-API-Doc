@@ -51,8 +51,9 @@ To create and retrieve a Mutable Data structure handle you will need to pass thr
 #### Shared Mutable Data
 
 // Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726>
+and video by Hunter Lester here https://youtu.be/E80IH8mCKaw
 
-Shared Mutable Data is an encrypted and can be used for collaborative purpose, like a private group in Chaty.
+Shared Mutable Data is a an encrypted Mutable Data Structure that can be used for collaborative purpose, like a private messaging group in Chaty.
 
 ### Immutable Data
 
