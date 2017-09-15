@@ -1,10 +1,12 @@
 # A rundown of the SAFE API
 
-// A great reference by MaidSafe Here <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1> and <https://forum.safedev.org/t/how-to-develop-for-the-safe-network-draft/843>
+References by MaidSafe here <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1> and here <https://forum.safedev.org/t/how-to-develop-for-the-safe-network-draft/843>
+
+References by the community here <https://safe-network-explained.github.io/architecture> and here [The SAFE Paper here]
 
 ## SAFE Browser and the Authenticator
 
-The SAFE Browser is developed by MaidSafe and provides access to SAFE Network and websites on the SAFE Network.
+The SAFE Browser is developed by MaidSafe and provides access to the SAFE Network and websites on the SAFE Network.
 
 It has an integrated feature called Authenticator. The Authenticator is used to for signing in and creating an account on the SAFE Network.
 
@@ -50,8 +52,7 @@ To create and retrieve a Mutable Data structure handle you will need to pass thr
 
 #### Shared Mutable Data
 
-// Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726>
-and video by Hunter Lester here https://youtu.be/E80IH8mCKaw
+// Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
 
 Shared Mutable Data is a an encrypted Mutable Data Structure that can be used for collaborative purpose, like a private messaging group in Chaty.
 
@@ -82,15 +83,15 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 // Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults.
 
-### Network File Storage (NFS)
+### NFS (Network File Storage)
 
 // Needs to be verified
 
 It is possible to combine the advantages of the these two data types into an emulation file-system on top of the network called NFS (Network File Storage).
 
-A file will be uploaded to the SAFE Network using Immutable Data with its value being the file content. Then a new Mutable Data entry is created with the file name being its key and the Data Map Address of the Immutable Data file as its value.
+NFS uses Immutable Data to save a file content, it then creates an entry in a given Mutable Data structure. It uses the file name as the entry's key and the Immutable Data's address as the entry's value.
 
-Since we are using Mutable Data to reference the file we are able to update the file by creating another Immutable Data entry and using its Data Map Address as the new value in our Mutable Data Structure. This Mutable Data Structure can be used again to store more NFS files.
+This enables you to update a file by uploading a new Immutable Data file and then updating the file's address in the entry's value. This Mutable Data Structure can be used again to store more NFS files.
 
 #### Hierarchy File-System Emulation
 
@@ -157,9 +158,10 @@ Once you upload an index.html to your web service you will be then able to navig
 
 // Needs to be verified
 
-The SAFE Browser works by getting the URL you pass to it and looking at the Public ID (the string after the dot). It then hashes it and uses that hash as the 32 length buffer along with the type tag 15001 so it can retrieve the Mutable Data Structure.
+The SAFE Browser works by getting the URL you pass to it and looking at the Public ID (the string after the dot). It then hashes it and uses that hash as the Mutable Data Name and along with the type tag 15001 it can retrieve the Mutable Data Structure.
 
-Now the Browser looks at the Service Name in the URL, it will find a key that equals are Service Name in the Public ID's Mutable Data Structure, that key's value will be 32 length buffer. The browser will then get a Mutable Data Structure using that buffer and the type tag of 15002, this will return the Mutable Data Structure containing our website and all our files.
+Now the Browser looks at the Service Name in the URL, it will find a key that equals the Service Name in the Public ID's Mutable Data Structure, that key's value will be a Mutable Data Name. The browser using that Mutable Data Name and the type tag of 15002 will then get a Mutable Data Structure containing our website and all our files.
+
 
 The browser will look for a specific key in this Mutable Data Structure, index.html. If the index.html key is found it will retrieve it using NFS and display in the browser, otherwise if index.html isn't found the browser will return an error.
 
