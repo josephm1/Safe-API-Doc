@@ -1,8 +1,18 @@
 # A rundown of the SAFE API
 
-References by MaidSafe here <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1> and here <https://forum.safedev.org/t/how-to-develop-for-the-safe-network-draft/843>
+Developing Guides by MaidSafe:
+- [SAFE Network API - Getting started ](https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1)
+- [How to develop for the SAFE Network ](https://forum.safedev.org/t/how-to-develop-for-the-safe-network-draft/843)
 
-References by the community here <https://safe-network-explained.github.io/architecture> and here [The SAFE Paper here]
+SAFE API Documentation
+- [Node.js docs ](http://docs.maidsafe.net/safe_app_nodejs)
+- [JavaScript docs ](http://docs.maidsafe.net/beaker-plugin-safe-app/)
+
+
+Explanations of the SAFE Network by the community:
+- [The SAFE Paper]
+- [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
+- [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
 
 ## SAFE Browser and the Authenticator
 
@@ -12,9 +22,9 @@ It has an integrated feature called Authenticator. The Authenticator is used to 
 
 ### SAFE Accounts
 
-An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each write action preformed on the Network will cost a PUT or maybe more if you are uploading files. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
+An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each action preformed on the Network costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
 
-Please note reading data from the SAFE Network such as accessing a website do not cost any PUTS and don't even require you to be signed in to your SAFE Account.
+Reading data from the SAFE Network such as accessing a website do not cost any PUTS and don't even require you to be signed in to your SAFE Account.
 
 ### SAFE API Basic functions
 
@@ -34,21 +44,21 @@ ignore //
 
 ## Data on the SAFE Network
 
-There are only two generic types of data on the safe network, Mutable Data (can change) and Immutable Data (can't change).
+There are only two generic types of data on the SAFE Network, Mutable Data (can change) and Immutable Data (can't change).
 
 ### Mutable Data
 
 // Needs to be verified
 
-The Mutable Data on the safe network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these entries.
+The Mutable Data on the SAFE Network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these entries.
 
-A Mutable Data Structure can be Public, Private (encrypted) or Shared.
+A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
 
-Mutable Data is subject to some limits, it cannot hold more than a 1000 entries and the Mutable Data Structure itself must remain under 1 MB in size.
+There are three types of Mutable Data structures: Public (websites), Private (private files) and Shared (private messaging groups).
 
-Mutable Data has some abilities in particular the ability to set permissions, this means you can enable the ability to insert, update or delete entries in the Mutable Data structure for yourself, a particular person or everyone.
+Mutable Data has abilities such as: ability to set permissions this means you can enable the ability to insert, remove or update for yourself, a particular person or everyone.
 
-To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
+To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
 
 #### Shared Mutable Data
 
@@ -60,11 +70,11 @@ Shared Mutable Data is a an encrypted Mutable Data Structure that can be used fo
 
 // Needs to be verified
 
-Immutable Data can only hold one value, but its size is only limited by the current Test Network restrictions or when the network is fully released the amount of SAFE Coin you have.
+Immutable Data only holds one value, but its size is only limited by the current Test Network restrictions or when the network is fully released the amount of SAFE Coin you have.
 
 Immutable Data has the ability to be encrypted with both asymmetric (Two people, email) and symmetric (one person, private files) encryption as well as leaving it plain (websites).
 
-Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length secure hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone. This is done by using XOR.
+Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone. This is done by using XOR.
 
 #### Exclusive Or (XOR)
 
@@ -87,11 +97,11 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 // Needs to be verified
 
-It is possible to combine the advantages of the these two data types into an emulation file-system on top of the network called NFS (Network File Storage).
+It is possible to save data using a combination of Mutable and Immutable Data to create an emulation file-system on top of the network called NFS (Network File Storage).
 
 NFS uses Immutable Data to save a file content, it then creates an entry in a given Mutable Data structure. It uses the file name as the entry's key and the Immutable Data's address as the entry's value.
 
-This enables you to update a file by uploading a new Immutable Data file and then updating the file's address in the entry's value. This Mutable Data Structure can be used again to store more NFS files.
+This enables you to update or change a file by uploading a new Immutable Data file and then updating the file's address in the entry's value. This Mutable Data Structure can be used again to store more NFS files.
 
 #### Hierarchy File-System Emulation
 
