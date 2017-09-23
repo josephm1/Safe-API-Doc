@@ -22,25 +22,18 @@ It has an integrated feature called Authenticator. The Authenticator is used to 
 
 ### SAFE Accounts
 
-An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each action preformed on the Network costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
+An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each action preformed on the Network other than 'READ' costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
 
-Reading data from the SAFE Network such as accessing a website do not cost any PUTS and don't even require you to be signed in to your SAFE Account.
+Reading data from the SAFE Network such as accessing a website does not cost any PUTS and don't even require you to be signed in to your SAFE Account.
 
-### SAFE API Basic functions
+## SAFE API Flow
 
-// Rename
+![SAFE API Flow](SAFE-API-Flow.png)
 
-// This needs to be edited, authorised is needed for some parts of these functions but not entire functions and authorised is needed for parts of safe App and Cipher Opt, so this is wrong. I think a flow chat like this is a good idea, so will use as a template, feel free to change it to a more accurate version with the xml file provided in the Github.
 
-// ignore
+## Handles and the SAFE API
 
-![picture](./1.png)
-
-State      | Not Initialised | Connected to Network | Authorised to use
----------- | --------------- | -------------------- | -----------------
-**Colour** | Orange          | Blue                 | Green
-
-ignore //
+## Authorising and connecting to the SAFE Network
 
 ## Data on the SAFE Network
 
@@ -74,9 +67,11 @@ Immutable Data only holds one value, but its size is only limited by the current
 
 Immutable Data has the ability to be encrypted with both asymmetric (Two people, email) and symmetric (one person, private files) encryption as well as leaving it plain (websites).
 
-Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone. This is done by using XOR.
+Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone.
 
-#### Exclusive Or (XOR)
+<!-- This is done by using XOR. -->
+
+<!-- #### Exclusive Or (XOR)
 
 //Needs to be explained better, why it's used, how it works and verified to be make sure it's right // This is a good reference <https://blog.maidsafe.net/2016/05/27/structuring-networks-with-xor/> for XOR on vaults and clients.
 
@@ -91,7 +86,7 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 ##### A ⊕ B (The XOR distance of A and B) == C
 
-// Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults.
+// Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults. -->
 
 ### NFS (Network File Storage)
 
