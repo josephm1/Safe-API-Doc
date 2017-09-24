@@ -1,6 +1,6 @@
 # A rundown of the SAFE API
 
-Developing Guides by MaidSafe:
+Development Guides by MaidSafe:
 - [SAFE Network API - Getting started ](https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1)
 - [How to develop for the SAFE Network ](https://forum.safedev.org/t/how-to-develop-for-the-safe-network-draft/843)
 
@@ -10,9 +10,9 @@ SAFE API Documentation
 
 
 Explanations of the SAFE Network by the community:
-- [The SAFE Paper]
 - [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
 - [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
+- [The SAFE Paper]
 
 ## SAFE Browser and the Authenticator
 
@@ -33,7 +33,17 @@ Reading data from the SAFE Network such as accessing a website does not cost any
 
 ## Handles and the SAFE API
 
-## Authorising and connecting to the SAFE Network
+The SAFE API uses handles frequently. A handle is a reference to a resource, this resource can be an authentication token (App Handle) or the location of a Mutable Data (Mutable Data Handle). These handles are different for each session.
+
+When you free a handle, the reference is freed from memory and you are then able to make another handle to the same type of resource.
+
+## Connecting and authorising to the SAFE Network
+
+There are two states you can be in to access the SAFE API: Connected and Authorised.
+
+When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys.
+
+When you are authorised you have full access to the SAFE API and are able to preform all actions.
 
 ## Data on the SAFE Network
 
@@ -47,11 +57,11 @@ The Mutable Data on the SAFE Network is saved as a key-value store. This means r
 
 A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
 
+To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
+
 There are three types of Mutable Data structures: Public (websites), Private (private files) and Shared (private messaging groups).
 
-Mutable Data has abilities such as: ability to set permissions this means you can enable the ability to insert, remove or update for yourself, a particular person or everyone.
-
-To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
+Mutable Data has abilities such as: inserting, mutating and setting permissions.   
 
 #### Shared Mutable Data
 
@@ -63,11 +73,13 @@ Shared Mutable Data is a an encrypted Mutable Data Structure that can be used fo
 
 // Needs to be verified
 
-Immutable Data only holds one value, but its size is only limited by the current Test Network restrictions or when the network is fully released the amount of SAFE Coin you have.
+Immutable Data holds a single value. Its size is only limited by the current Test Network/Alpha 2 restrictions or when the network is fully released the amount of SAFE Coin you have.
 
-Immutable Data has the ability to be encrypted with both asymmetric (Two people, email) and symmetric (one person, private files) encryption as well as leaving it plain (websites).
+Immutable Data has the ability to be encrypted with both asymmetric (Two people, email) and symmetric (one person, private files) encryption as well as leaving it as plaintext (websites).
 
-Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content. The Data Map Address of a file can't change and is the same for everyone.
+Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content.
+
+Since the Immutable Data's address is also a hash of its file content the file cannot be change in any way and must remain static unlike Mutable Data.
 
 <!-- This is done by using XOR. -->
 
