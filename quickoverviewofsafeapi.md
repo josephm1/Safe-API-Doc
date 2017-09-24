@@ -24,8 +24,6 @@ It has an integrated feature called Authenticator. The Authenticator is used to 
 
 An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each action preformed on the Network other than 'READ' costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
 
-Reading data from the SAFE Network such as accessing a website does not cost any PUTS and don't even require you to be signed in to your SAFE Account.
-
 ## SAFE API Flow
 
 ![SAFE API Flow](SAFE-API-Flow.png)
@@ -41,9 +39,9 @@ When you free a handle, the reference is freed from memory and you are then able
 
 There are two states you can be in to access the SAFE API: Connected and Authorised.
 
-When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys.
+When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys. The user doesn't need to be signed to connect.
 
-When you are authorised you have full access to the SAFE API and are able to preform all actions.
+When you are authorised you have full access to the SAFE API and are able to preform all actions. The user needs to be signed to authorise.
 
 ## Data on the SAFE Network
 
@@ -79,7 +77,7 @@ Immutable Data has the ability to be encrypted with both asymmetric (Two people,
 
 Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable Data file content.
 
-Since the Immutable Data's address is also a hash of its file content the file cannot be change in any way and must remain static unlike Mutable Data.
+Since the Immutable Data's address is also a hash of its file content the file cannot be changed in any way and must remain static unlike Mutable Data.
 
 <!-- This is done by using XOR. -->
 
