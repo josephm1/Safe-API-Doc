@@ -1,4 +1,4 @@
-# A rundown of the SAFE API
+# SAFE API Overview
 
 Development Guides by MaidSafe:
 - [SAFE Network API - Getting started ](https://forum.safedev.org/t/safe-network-api-getting-started-draft/726/1)
@@ -39,7 +39,7 @@ When you free a handle, the reference is freed from memory and you are then able
 
 There are two states you can be in to access the SAFE API: Connected and Authorised.
 
-When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys. The user doesn't need to be signed to connect.
+When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys. The user doesn't need to be signed in to connect.
 
 When you are authorised you have full access to the SAFE API and are able to preform all actions. The user needs to be signed to authorise.
 
@@ -57,7 +57,7 @@ A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 
 
 To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
 
-There are three types of Mutable Data structures: Public (websites), Private (private files) and Shared (private messaging groups).
+There are three types of Mutable Data structures: Public (websites), Private (private files) and Shared (cross-website messaging groups).
 
 Mutable Data has abilities such as: inserting, mutating and setting permissions.   
 
@@ -65,7 +65,14 @@ Mutable Data has abilities such as: inserting, mutating and setting permissions.
 
 // Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
 
-Shared Mutable Data is a an encrypted Mutable Data Structure that can be used for collaborative purpose, like a private messaging group in Chaty.
+// Need to explain better and verify
+
+When you set up a public Mutable Data structure only the app info you set it up with is given access to modify it unless you use Shared Mutable Data.
+
+Shared Mutable Data is a public Mutable Data Structure that can be used for collaborative purpose across different websites (with different app infos), like a collaborative messaging group in Chaty.
+
+\*App Info is the parameter in the intialise function, Hunter Lester's goes through what happens.
+
 
 ### Immutable Data
 
@@ -102,7 +109,7 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 // Needs to be verified
 
-It is possible to save data using a combination of Mutable and Immutable Data to create an emulation file-system on top of the network called NFS (Network File Storage).
+It is possible to save data using a combination of Mutable and Immutable Data to create an emulation file-system on top of the network called NFS.
 
 NFS uses Immutable Data to save a file content, it then creates an entry in a given Mutable Data structure. It uses the file name as the entry's key and the Immutable Data's address as the entry's value.
 
