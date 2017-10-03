@@ -10,9 +10,11 @@ SAFE API Documentation
 
 
 Explanations of the SAFE Network by the community:
+- [The SAFE Primer]
 - [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
 - [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
-- [The SAFE Paper]
+- [Introduction to the SAFE Network
+](https://medium.com/@luandro/introduction-to-the-safe-network-33d8641b2dee)
 
 ## SAFE Browser and the Authenticator
 
@@ -43,6 +45,8 @@ There are two network states in the SAFE API: Connected and Authorised.
 
 The user needs to be signed to authorise. When you are authorised you have full access to the SAFE API and are able to preform all actions.
 
+//App Info
+
 ## Data on the SAFE Network
 
 There are only two generic types of data on the SAFE Network, Mutable Data (can change) and Immutable Data (can't change).
@@ -55,26 +59,25 @@ The Mutable Data on the SAFE Network is saved as a key-value store. This means r
 
 A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
 
-To create and retrieve a Mutable Data structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag. A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
+To create and retrieve a Mutable Data Structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag. A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
 
-There are three types of Mutable Data structures: Public (websites), Private (private files) and Shared (cross-website messaging groups).
+There are three types of Mutable Data Structures: Public (websites), Private (private files) and Shared (cross-website messaging groups).
 
 Mutable Data Structures support: inserting, mutating and setting permissions.   
 
 #### Shared Mutable Data
 
 // Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
-
 // Need to explain better and verify
-
 // This is probably wrong and will be updated later
-
-When you set up a public Mutable Data structure only the app info you set it up with is given access to modify it unless you use Shared Mutable Data.
-
-Shared Mutable Data is a public Mutable Data Structure that can be used for collaborative purpose across different websites (with different app infos), like a collaborative messaging group in Chaty.
 
 \*App Info is the parameter in the intialise function, Hunter Lester's video goes through what happens.
 
+When you set up a Mutable Data Structure only the app info you set it up with is given default access to modify it.
+
+Shared Mutable Data requests access to a given Mutable Data Structure that the user created.
+
+Shared Mutable Data can be used across different websites (with different app infos), like a collaborative messaging group in Chaty.
 
 ### Immutable Data
 
@@ -113,7 +116,7 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 It is possible to save data using a combination of Mutable and Immutable Data to create an emulation file-system on top of the network called NFS.
 
-NFS uses Immutable Data to save a file content, it then creates an entry in a given Mutable Data structure. It uses the file name as the entry's key and the Immutable Data's address as the entry's value.
+NFS uses Immutable Data to save a file content, it then creates an entry in a given Mutable Data Structure. It uses the file name as the entry's key and the Immutable Data's address as the entry's value.
 
 This enables you to update or change a file by uploading a new Immutable Data file and then updating the file's address in the entry's value. This Mutable Data Structure can be used again to store more NFS files.
 
@@ -160,9 +163,9 @@ All data stored in these containers are stored randomly on the Network should be
 
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name looks like `apps/id.example.net`.
 
-## Domain Name System (DNS)
+## DNS (Domain Name System)
 
-The Domain Name System is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
+ DNS is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
 
 ## We will now take a look at some of MaidSafe's Applications.
 
