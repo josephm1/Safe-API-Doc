@@ -167,7 +167,7 @@ The app container is created for websites if they request their to have own cont
 
  DNS is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
 
-## We will now take a look at some of MaidSafe's Applications.
+## How do MaidSafe's Applications work?
 
 ### Web Hosting Manager
 
@@ -194,7 +194,7 @@ The browser will look for a specific key in this Mutable Data Structure, index.h
 
 ### SAFE Email App
 
-## We will now take a look at some websites I have developed.
+## How do my websites work?
 
 ### Demoy
 
