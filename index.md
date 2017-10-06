@@ -126,13 +126,13 @@ When dealing with folders and files being uploaded that are within subdirectorie
 
 This means the key of a Mutable Data Structure containing files would look something like this: `filepath/subdir/index.html`.
 
-### Containers
+## Containers
 
 // More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
 
 Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores music and sound files.
 
-#### Root Container
+### Root Container
 
 // Could be made simpler
 
@@ -144,7 +144,7 @@ Its reference will be stored in the users session packet on account creation. Ke
 
 The authenticator has another mapped data container which holds the encryption keys per each container, which is locally encrypted with a separate key that only the authenticator has access to and will never be shared. This is called: `RootKeysContainer`.
 
-#### Default containers
+### Default containers
 
 The authenticator will create the following default containers within the root container when you create an account:
 
@@ -159,7 +159,7 @@ The authenticator will create the following default containers within the root c
 
 All data stored in these containers are stored randomly on the Network should be encrypted other than `_public`.
 
-#### App container
+### App container
 
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name looks like `apps/id.example.net`.
 
