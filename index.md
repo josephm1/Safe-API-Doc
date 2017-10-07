@@ -61,20 +61,21 @@ A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 
 
 To create and retrieve a Mutable Data Structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
 
-TODO:#### Type Tags
-A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
-
 There are two types of Mutable Data Structures: Public (websites) and Private (private files).
 
 Mutable Data Structures support: inserting, mutating and setting permissions.   
 
+#### Type Tags
+TODO: Add more
+<br>A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
+
 #### Shared Mutable Data
 
-TODO: Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
+ Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
 <br>TODO: Need to explain better and verify
 <br>TODO: This is probably wrong and will be updated later
 
-\*App Info is the parameter in the intialise function, Hunter Lester's video goes through what happens.
+<!-- \*App Info is the parameter in the intialise function, Hunter Lester's video goes through what happens. -->
 
 When you set up a Private or Public Mutable Data Structure it gives permissions to an application key. That key is derived from the account and the application used to set up the Mutable Data Structure.
 
@@ -131,7 +132,7 @@ This means the key of a Mutable Data Structure containing files would look somet
 
 ## Containers
 
-TODO: More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
+ More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
 
 Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores music and sound files.
 
@@ -143,9 +144,10 @@ The root container is the main entry point for the user and apps to interact wit
 
 Its reference will be stored in the users session packet on account creation. Keys starting with an underscore ( _ ) are reserved for internal usage by the authenticator, while the authenticator may also allow the creation of other keys later.
 
-TODO: Session Packet
-
 The authenticator has another mapped data container which holds the encryption keys per each container, which is locally encrypted with a separate key that only the authenticator has access to and will never be shared. This is called: `RootKeysContainer`.
+
+#### Session Packet
+TODO
 
 ### Default containers
 
@@ -166,7 +168,8 @@ All data stored in these containers are stored randomly on the Network should be
 
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name looks like `apps/id.example.net`.
 
-TODO:## Cryptography and Keys
+## Cryptography and Keys
+TODO
 
 ## DNS (Domain Name System)
 
@@ -209,12 +212,10 @@ It does this by uploading a file with the filename as an entry's key and file co
 
 When a file is selected to be retrieved the file extension is checked to see what format to display the file in. It accepts video, image, audio and text, if the file isn't in an accepted it format the user will be presented with a button to download the file. If the file is shown as a text file the user will be able to edit it in the browser and save it directly to the network. There is also the ability to delete and update files in the browser.
 
-TODO: More resources here
-
 Demoy overview <https://www.youtube.com/watch?v=4yIRrn2e-9E>
-
+<br>
 javascript file rundown <https://www.youtube.com/watch?v=IySa5RB9iCE>
-
+<br>
 Demoy's Github <https://github.com/josephm1/Demoy>
 
 ### Chaty
