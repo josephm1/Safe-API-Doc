@@ -24,7 +24,7 @@ It has an integrated feature called Authenticator. The Authenticator is used to 
 
 ### SAFE Accounts
 
-An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS', each action preformed on the Network other than 'READ' costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
+An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data you can 'PUT' on the Network. It measures your use in 'PUTS'. Each action preformed on the Network other than 'READ' costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
 
 ## SAFE API Flow
 
@@ -35,7 +35,7 @@ An account on the SAFE Network is needed for uploading data. The current Test Ne
 
 The SAFE API uses handles frequently. A handle is a reference to a resource. An example of a resource can be an authentication token (App Handle) or the location of a Mutable Data Structure (Mutable Data Handle). These handles are different for each session.
 
-When you free a handle, the reference is freed from memory and you are then able to make another handle of the same type of resource.
+When you free a handle the reference is freed from memory and you are then able to make another handle of the same type of resource.
 
 ### Connecting and authorising on the SAFE Network
 
@@ -45,7 +45,7 @@ There are two network states in the SAFE API: Connected and Authorised.
 
 The user needs to be signed to authorise. When you are authorised you have full access to the SAFE API and are able to preform all actions.
 
-//App Info
+TODO:App Info
 
 ## Data on the SAFE Network
 
@@ -53,35 +53,38 @@ There are only two generic types of data on the SAFE Network, Mutable Data (can 
 
 ### Mutable Data
 
-// Needs to be verified
+TODO: Needs to be verified
 
 The Mutable Data on the SAFE Network is saved as a key-value store. This means requested data from the network will return something like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these entries.
 
 A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
 
-To create and retrieve a Mutable Data Structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag. A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
+To create and retrieve a Mutable Data Structure handle you will need to pass three parameters to it: your app handle, a 32 length buffer (this can be a hash of a particular string with `safeCrypto.sha3Hash`) and its type tag.
 
-There are three types of Mutable Data Structures: Public (websites), Private (private files) and Shared (cross-website messaging groups).
+TODO:#### Type Tags
+A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
+
+There are two types of Mutable Data Structures: Public (websites) and Private (private files).
 
 Mutable Data Structures support: inserting, mutating and setting permissions.   
 
 #### Shared Mutable Data
 
-// Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
-// Need to explain better and verify
-// This is probably wrong and will be updated later
+TODO: Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
+<br>TODO: Need to explain better and verify
+<br>TODO: This is probably wrong and will be updated later
 
 \*App Info is the parameter in the intialise function, Hunter Lester's video goes through what happens.
 
-When you set up a Mutable Data Structure only the app info you set it up with is given default access to modify it.
+When you set up a Private or Public Mutable Data Structure it gives permissions to an application key. That key is derived from the account and the application used to set up the Mutable Data Structure.
 
-Shared Mutable Data requests access to a given Mutable Data Structure that the user created.
+This means only that application in combination with the account has permissions for that Mutable Data Structure.
 
-Shared Mutable Data can be used across different websites (with different app infos), like a collaborative messaging group in Chaty.
+To enable permissions from a different application Shared Mutable Data is used to request permissions.
 
 ### Immutable Data
 
-// Needs to be verified
+TODO: Needs to be verified
 
 Immutable Data holds a single value. Its size is only limited by the current Test Network/Alpha 2 restrictions or when the network is fully released the amount of SAFE Coin you have.
 
@@ -112,7 +115,7 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 ### NFS (Network File Storage)
 
-// Needs to be verified
+TODO: Needs to be verified
 
 It is possible to save data using a combination of Mutable and Immutable Data to create an emulation file-system on top of the network called NFS.
 
@@ -128,19 +131,19 @@ This means the key of a Mutable Data Structure containing files would look somet
 
 ## Containers
 
-// More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
+TODO: More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
 
 Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores music and sound files.
 
 ### Root Container
 
-// Could be made simpler
+TODO: Could be made simpler
 
 The root container is the main entry point for the user and apps to interact with. It is a locally encrypted container stored at a random location on the network known only to the user, that generally only the authenticator has write access to.
 
 Its reference will be stored in the users session packet on account creation. Keys starting with an underscore ( _ ) are reserved for internal usage by the authenticator, while the authenticator may also allow the creation of other keys later.
 
-// Session Packet
+TODO: Session Packet
 
 The authenticator has another mapped data container which holds the encryption keys per each container, which is locally encrypted with a separate key that only the authenticator has access to and will never be shared. This is called: `RootKeysContainer`.
 
@@ -163,6 +166,8 @@ All data stored in these containers are stored randomly on the Network should be
 
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name looks like `apps/id.example.net`.
 
+TODO:## Cryptography and Keys
+
 ## DNS (Domain Name System)
 
  DNS is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
@@ -171,7 +176,7 @@ The app container is created for websites if they request their to have own cont
 
 ### Web Hosting Manager
 
-// Needs to be verified
+TODO: Needs to be verified
 
 The Web Hosting Manager will first create a Public ID. This is a Public Mutable Data Structure with the Hash of the Public ID you give it and the type tag of 15001, this Public ID can be used again in other websites and applications such as the SAFE Email App.
 
@@ -183,7 +188,7 @@ Once you upload an index.html to your web service you will be then able to navig
 
 ### SAFE Browser
 
-// Needs to be verified
+ TODO:Needs to be verified
 
 The SAFE Browser works by getting the URL you pass to it and looking at the Public ID (the string after the dot). It then hashes it and uses that hash as the Mutable Data Name and along with the type tag 15001 it can retrieve the Mutable Data Structure.
 
@@ -204,7 +209,7 @@ It does this by uploading a file with the filename as an entry's key and file co
 
 When a file is selected to be retrieved the file extension is checked to see what format to display the file in. It accepts video, image, audio and text, if the file isn't in an accepted it format the user will be presented with a button to download the file. If the file is shown as a text file the user will be able to edit it in the browser and save it directly to the network. There is also the ability to delete and update files in the browser.
 
-// More resources here
+TODO: More resources here
 
 Demoy overview <https://www.youtube.com/watch?v=4yIRrn2e-9E>
 
