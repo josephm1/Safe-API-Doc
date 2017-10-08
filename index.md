@@ -10,7 +10,7 @@ SAFE API Documentation
 
 
 Explanations of the SAFE Network by the community:
-- [The SAFE Primer]
+- [The SAFE Network Primer]
 - [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
 - [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
 - [Introduction to the SAFE Network
@@ -37,15 +37,17 @@ The SAFE API uses handles frequently. A handle is a reference to a resource. An 
 
 When you free a handle the reference is freed from memory and you are then able to make another handle of the same type of resource.
 
-### Connecting and authorising on the SAFE Network
+### Initialising
+The first step to interact with the SAFE Network is to initialise your application. You need to pass information about your application to the API, App ID, Name and Vendor.
+
+
+### Connecting and Authorising
 
 There are two network states in the SAFE API: Connected and Authorised.
 
  The user doesn't need to be signed in to connect. When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys.
 
-The user needs to be signed to authorise. When you are authorised you have full access to the SAFE API and are able to preform all actions.
-
-TODO:App Info
+The user needs to be signed to authorise. To authorise you need to specify which containers and permissions your app wants to access and whether you would like to use your own App Container. When you are authorised you have full access to the SAFE API and are able to preform all actions.
 
 ## Data on the SAFE Network
 
@@ -66,22 +68,23 @@ There are two types of Mutable Data Structures: Public (websites) and Private (p
 Mutable Data Structures support: inserting, mutating and setting permissions.   
 
 #### Type Tags
-TODO: Add more
-<br>A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures.
+A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures. This means that two of the same hashes can reference different Mutable Data Structures if they use different type tags. Please note the type tags 0-10,000 are reserved by MaidSafe.
+
+RFC: [Reserved Names](https://github.com/maidsafe/rfcs/blob/master/text/0003-reserved-names/0003-reserved-names.md)
 
 #### Shared Mutable Data
-
- Great Reference <https://forum.safedev.org/t/safe-network-api-getting-started-draft/726> and video by Hunter Lester here <https://youtu.be/E80IH8mCKaw>
-<br>TODO: Need to explain better and verify
-<br>TODO: This is probably wrong and will be updated later
-
-<!-- \*App Info is the parameter in the intialise function, Hunter Lester's video goes through what happens. -->
+TODO: Need to explain better and verify
+<br>TODO: This is probably wrong
 
 When you set up a Private or Public Mutable Data Structure it gives permissions to an application key. That key is derived from the account and the application used to set up the Mutable Data Structure.
 
 This means only that application in combination with the account has permissions for that Mutable Data Structure.
 
 To enable permissions from a different application Shared Mutable Data is used to request permissions.
+
+<br>SAFE Dev Topic: [Shared Mutable Data Reference](https://forum.safedev.org/t/safe-network-api-getting-started-draft/726)
+<br> SAFE Dev Topic: [Shared Mutable Data Discussion](https://forum.safedev.org/t/need-help-with-shared-md-authorisesharemd-function/989)
+<br>Video: [Shared Mutable Data by Hunter Lester](https://youtu.be/E80IH8mCKaw)
 
 ### Immutable Data
 
@@ -132,9 +135,9 @@ This means the key of a Mutable Data Structure containing files would look somet
 
 ## Containers
 
- More info here and great reference <https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md>
-
 Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores music and sound files.
+
+[More info about containers here](https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md)
 
 ### Root Container
 
@@ -175,9 +178,11 @@ TODO
 
  DNS is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
 
-## How do MaidSafe's Applications work?
+## Mechanics of SAFE Applications
 
-### Web Hosting Manager
+### How do MaidSafe's Applications work?
+
+#### Web Hosting Manager
 
 TODO: Needs to be verified
 
@@ -189,9 +194,9 @@ Then a new entry will be created and saved to our Public ID's Mutable Data Struc
 
 Once you upload an index.html to your web service you will be then able to navigate to your own website, it will have a URL which looks something like this: `safe://servicename.publicid`
 
-### SAFE Browser
+#### SAFE Browser
 
- TODO:Needs to be verified
+ TODO: Needs to be verified
 
 The SAFE Browser works by getting the URL you pass to it and looking at the Public ID (the string after the dot). It then hashes it and uses that hash as the Mutable Data Name and along with the type tag 15001 it can retrieve the Mutable Data Structure.
 
@@ -200,11 +205,11 @@ Now the Browser looks at the Service Name in the URL, it will find a key that eq
 
 The browser will look for a specific key in this Mutable Data Structure, index.html. If the index.html key is found it will retrieve it using NFS and display in the browser, otherwise if index.html isn't found the browser will return an error.
 
-### SAFE Email App
+#### SAFE Email App
 
-## How do my websites work?
+### How do my websites work?
 
-### Demoy
+#### Demoy
 
 Demoy was designed to showcase the Mutable Data functions. It works by using its app container to store and retrieve files.
 
@@ -212,14 +217,14 @@ It does this by uploading a file with the filename as an entry's key and file co
 
 When a file is selected to be retrieved the file extension is checked to see what format to display the file in. It accepts video, image, audio and text, if the file isn't in an accepted it format the user will be presented with a button to download the file. If the file is shown as a text file the user will be able to edit it in the browser and save it directly to the network. There is also the ability to delete and update files in the browser.
 
-Demoy overview <https://www.youtube.com/watch?v=4yIRrn2e-9E>
+Video: [Demoy Overview](https://www.youtube.com/watch?v=4yIRrn2e-9E)
 <br>
-javascript file rundown <https://www.youtube.com/watch?v=IySa5RB9iCE>
+Video: [JavaScript File Rundown](https://www.youtube.com/watch?v=IySa5RB9iCE)
 <br>
-Demoy's Github <https://github.com/josephm1/Demoy>
+Github: [Demoy](https://github.com/josephm1/Demoy)
 
-### Chaty
+#### Chaty
 
-### Vidy
+#### Vidy
 
-### Listy
+#### Listy
