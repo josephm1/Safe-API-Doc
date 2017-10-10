@@ -30,18 +30,21 @@ An account on the SAFE Network is needed for uploading data. The current Test Ne
 
 ![SAFE API Flow](SAFE-API-Flow.png)
 
-
 ### Handles and the SAFE API
+TODO: Needs to be verified
 
 The SAFE API uses handles frequently. A handle is a reference to a resource. An example of a resource can be an authentication token (App Handle) or the location of a Mutable Data Structure (Mutable Data Handle). These handles are different for each session.
 
 When you free a handle the reference is freed from memory and you are then able to make another handle of the same type of resource.
 
 ### Initialising
+TODO: Needs to be verified
+
 The first step to interact with the SAFE Network is to initialise your application. You need to pass information about your application to the API, App ID, Name and Vendor.
 
 
 ### Connecting and Authorising
+TODO: Needs to be verified
 
 There are two network states in the SAFE API: Connected and Authorised.
 
