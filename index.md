@@ -148,7 +148,7 @@ I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is no
 
 // Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults. -->
 
-## NFS (Network File Storage)
+## Network File Storage (NFS)
 
 TODO: Needs to be verified
 
