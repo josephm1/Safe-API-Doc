@@ -9,12 +9,14 @@ SAFE API Documentation
 - [JavaScript docs ](http://docs.maidsafe.net/beaker-plugin-safe-app/)
 
 
-Explanations of the SAFE Network by the community:
+Documentation and explanations of the SAFE Network by the community:
 - [The SAFE Network Primer]
 - [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
 - [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
 - [Introduction to the SAFE Network
 ](https://medium.com/@luandro/introduction-to-the-safe-network-33d8641b2dee)
+- [Developing for the SAFE Browser
+](https://medium.com/@luandro/developing-for-the-safe-browser-212decd575a3)
 
 ## SAFE Browser and the Authenticator
 
@@ -35,20 +37,20 @@ TODO: Needs to be verified
 
 The SAFE API uses handles frequently. A handle is a reference to a resource. An example of a resource can be an authentication token (App Handle) or the location of a Mutable Data Structure (Mutable Data Handle). These handles are different for each session.
 
-When you free a handle the reference is freed from memory and you are then able to make another handle of the same type of resource.
+It is recommended to free handles when they are no longer needed or in use.
 
-### Initialising
+### Initialise
 TODO: Needs to be verified
 
 The first step to interact with the SAFE Network is to initialise your application. You need to pass information about your application to the API, App ID, Name and Vendor.
 
 
-### Connecting and Authorising
+### Connect and Authorise
 TODO: Needs to be verified
 
 There are two network states in the SAFE API: Connected and Authorised.
 
- The user doesn't need to be signed in to connect. When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys.
+The user doesn't need to be signed in to connect. When you are connected you can 'READ', this means you can only read Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying entries, inserting permissions or getting Keys.
 
 The user needs to be signed to authorise. To authorise you need to specify which containers and permissions your app wants to access and whether you would like to use your own App Container. When you are authorised you have full access to the SAFE API and are able to preform all actions.
 
@@ -175,11 +177,42 @@ All data stored in these containers are stored randomly on the Network should be
 The app container is created for websites if they request their to have own container with their ID being used to identify it. This means the app container name looks like `apps/id.example.net`.
 
 ## Cryptography and Keys
-TODO
+ TODO: Still in progress
+ <br>TODO: Needs to be verified
+ <br>TODO: Maybe flowchart
+<br>TODO: Is App Public unique to user and app?
+<br>TODO: Use cases and examples
+<br>[Sodium crypto library docs](https://download.libsodium.org/doc/)
+
+### Hash
+This is a 32 length string which is derived from an input of data such as a file or a string. This is not unique to the user i.e. if I hash 'hello world' and you hash 'hello world' we will both get the same value back.
+
+### Sign Keys
+#### App Public
+This is a sign key derived from the application info and doesn't require input. This is unique.
+####  Raw
+This is a key to the user derived from an input of data such as a file or a string. This is unique.
+
+### Encryption Key
+
+#### App Public
+This is a public key derived from the application info and doesn't require input. This enables users to send you encrypted data. This is unique.
+
+#### Raw
+This is a public key derived from an input of data such as a file or a string. This enables users to send you encrypted data. This is unique.
+
+### Key pairs
+This is asymmetric encryption which requires 2 different keys that are linked together by a mathematical relationship.
+#### Public Encryption Key
+#### Secret Encryption Key
+
 
 ## DNS (Domain Name System)
+TODO: Explain thoroughly
 
- DNS is the method websites are located on the SAFE Network. It works by using Mutable Data and NFS to store and locate files. The Web Hosting Manager and SAFE Browser overview below go into more detail about DNS as they both use DNS extensively.
+DNS is the method websites are located on the SAFE Network using SAFE URLs. A SAFE URL consists of a URL that looks  like this: `safe://servicename.publicid`.
+
+It works by using Mutable Data to locate stored NFS files. The Web Hosting Manager and SAFE Browser Overviews below go into more detail of how DNS works.
 
 ## Mechanics of SAFE Applications
 
@@ -195,7 +228,7 @@ You will then be asked to create a Web Service Name. Once you enter in a name a 
 
 Then a new entry will be created and saved to our Public ID's Mutable Data Structure with the Web Service Name as its key and the Random Mutable Data name as its value.
 
-Once you upload an index.html to your web service you will be then able to navigate to your own website, it will have a URL which looks something like this: `safe://servicename.publicid`
+Once you upload an index.html to your web service you will be then able to navigate to your own website with its SAFE URL.
 
 #### SAFE Browser
 
