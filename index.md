@@ -113,6 +113,22 @@ Topic:
 [Shared Mutable Data Discussion](https://forum.safedev.org/t/need-help-with-shared-md-authorisesharemd-function/989)
 <br>Video: [Shared Mutable Data by Hunter Lester](https://youtu.be/E80IH8mCKaw)
 
+### Permissions
+
+TODO: Needs to be verified
+
+Mutable Data Structures can have permissions set to them. This means you can enable or disable permissions for yourself, another user or for anyone. These permissions include `Read`, `Delete`, `Insert`, `Update` and `ManagePermissions`.
+
+`Read`: Access to view the Mutable Data Structure
+<br>
+`Delete`: Remove the value for a specific entry from the Mutable Data Structure
+<br>
+`Insert`: Inserting a new entry to the Mutable Data Structure
+<br>
+`Update`: Change the value for a specific entry from the Mutable Data Structure
+<br>
+`ManagePermissions`: Inserting a new entry to the Mutable Data Structure
+
 ## Immutable Data
 
 TODO: Needs to be verified
@@ -218,43 +234,41 @@ identify it. This means the app container name looks like `apps/id.example.net`.
 
 ## Cryptography
 
-TODO: Still in progress <br>TODO: Needs to be verified <br>TODO: Maybe flowchart <br>TODO: Is App Public unique to user
-and app? <br>TODO: Use cases and examples <br>[Sodium crypto library docs](https://download.libsodium.org/doc/)
+TODO: Still in progress
+<br>TODO: Needs to be verified
+<br>TODO: Use cases and examples
+<br>[Sodium crypto library docs](https://download.libsodium.org/doc/)
 
 ### Hash
 
 This is a 32 length string which is derived from an input of data such as a file or a string. This is not unique to the
 user i.e. if I hash 'hello world' and you hash 'hello world' we will both get the same value back.
 
-### Sign Keys
+### Nonce
 
-#### App Public
+This is a random number that is generated for once off purposes. It is used in creating Private Mutable Data Structures.
 
-This is a sign key derived from the application info and doesn't require input. This is unique.
+### Comparisons between different cryptographic components
 
-#### Raw
+| Sign Key                                                 |                  Encryption keys                   |
+| -------------------------------------------------------- | :------------------------------------------------: |
+| Mathematical proof that show you are who you say you are | A method for encrypting and decrypting information |
 
-This is a key to the user derived from an input of data such as a file or a string. This is unique.
+| Key Pairs                                          |                    Single Key                    |
+| -------------------------------------------------- | :----------------------------------------------: |
+| This can be used to derive a secret and public key | This can only be either a secret or a public key |
 
-### Encryption Key
+| Public                         |            Secret            |
+| ------------------------------ | :--------------------------: |
+| This key should be made public | This key must be kept secret |
 
-#### App Public
+| Get App                                              | Generate                          |                   From Raw                   |
+| ---------------------------------------------------- | --------------------------------- | :------------------------------------------: |
+| Generates the key from the user and application data | Generates a new key pair randomly | Generates a new key from a given string this |
 
-This is a public key derived from the application info and doesn't require input. This enables users to send you
-encrypted data. This is unique.
-
-#### Raw
-
-This is a public key derived from an input of data such as a file or a string. This enables users to send you encrypted
-data. This is unique.
-
-### Key pairs
-
-This is asymmetric encryption which requires 2 different keys that are linked together by a mathematical relationship.
-
-#### Public Encryption Key
-
-#### Secret Encryption Key
+| Encrypted                                                |                                              Encrypted Sealed                                              |
+| -------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------: |
+| This data is just encrypted with a public encryption key | This data is encrypted with a public encryption key and then encrypted again with a string called a cipher |
 
 ## Domain Name System (DNS)
 
