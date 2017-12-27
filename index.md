@@ -258,9 +258,9 @@ This is a random number that is generated for once off purposes. It is used in c
 | -------------------------------------------------- | :----------------------------------------------: |
 | This can be used to derive a secret and public key | This can only be either a secret or a public key |
 
-| Public                         |            Secret            |
-| ------------------------------ | :--------------------------: |
-| This key should be made public | This key must be kept secret |
+| Public                                                     |                          Secret                          |
+| ---------------------------------------------------------- | :------------------------------------------------------: |
+| This key should be made public and is used to encrypt data | This key must be kept secret and is used to decrypt data |
 
 | Get App                                              | Generate                          |                   From Raw                   |
 | ---------------------------------------------------- | --------------------------------- | :------------------------------------------: |
