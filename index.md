@@ -28,8 +28,8 @@ on the SAFE Network.
 ### SAFE Accounts
 
 An account on the SAFE Network is needed for uploading data. The current Test Network has restrictions on how much data
-you can 'PUT' on the Network. It measures your use in 'PUTS'. Each action preformed on the Network other than 'READ'
-costs PUTS. Each account is limited to 1000 PUTS. This will change when SAFE Coin is implemented.
+you can `PUT` on the Network. It measures your use in `PUTS`. Each action preformed on the Network other than `READ`
+costs `PUTS`. Each account is limited to 1000 `PUTS`. This will change when SAFE Coin is implemented.
 
 ## SAFE API Flow
 
@@ -50,7 +50,7 @@ It is recommended to free handles when they are no longer needed or in use.
 TODO: Needs to be verified
 
 The first step to interact with the SAFE Network is to initialise your application. You need to pass information about
-your application to the API, App ID, Name and Vendor.
+your application to the API, including App ID, Name and Vendor.
 
 ### Connect and Authorise
 
@@ -58,7 +58,7 @@ TODO: Needs to be verified
 
 There are two network states in the SAFE API: Connected and Authorised.
 
-The user doesn't need to be signed in to connect. When you are connected you can 'READ', this means you can only read
+The user doesn't need to be signed in to connect. When you are connected you can `READ`, this means you can only read
 Public data and aren't able to preform actions such as: uploading to a Immutable or Mutable Data Structure, modifying
 entries, inserting permissions or getting Keys.
 
@@ -117,7 +117,7 @@ Topic:
 
 TODO: Needs to be verified
 
-Mutable Data Structures can have permissions set to them. This means you can enable or disable permissions for yourself, another user or for anyone. These permissions include `Read`, `Delete`, `Insert`, `Update` and `ManagePermissions`.
+Mutable Data Structures can have permissions set to them. This means you can enable or disable permissions for yourself, another user or for everyone. These permissions include `Read`, `Delete`, `Insert`, `Update` and `ManagePermissions`.
 
 `Read`: Access to view the Mutable Data Structure
 <br>
@@ -127,7 +127,7 @@ Mutable Data Structures can have permissions set to them. This means you can ena
 <br>
 `Update`: Change the value for a specific entry from the Mutable Data Structure
 <br>
-`ManagePermissions`: Inserting a new entry to the Mutable Data Structure
+`ManagePermissions`: Ability to specify permissions to the Mutable Data Structure
 
 ## Immutable Data
 
@@ -144,6 +144,16 @@ Data file content.
 
 Since the Immutable Data's address is also a hash of its file content the file cannot be changed in any way and must
 remain static unlike Mutable Data.
+
+### Cipher Opt
+
+TODO: Needs to be verified
+
+Immutable Data can be saved using Symmetric or Asymmetric encryption or Plain Text.
+
+| Symmetric                                                             | Asymmetric                                                            |                                Plain Text                                |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------------------------------------------------------------: |
+| Only for user who made the data and uses only a single encryption key | Can be used for more than one person and uses a secret and public key | This data is in plain form for all who know the Immutable Data's Address |
 
 <!-- This is done by using XOR. -->
 
@@ -250,25 +260,27 @@ This is a random number that is generated for once off purposes. It is used in c
 
 ### Comparisons between different cryptographic components
 
-| Sign Key                                                 |                  Encryption keys                   |
-| -------------------------------------------------------- | :------------------------------------------------: |
-| Mathematical proof that show you are who you say you are | A method for encrypting and decrypting information |
+| Sign Key                                       |         Encryption keys          |
+| ---------------------------------------------- | :------------------------------: |
+| Used to verify data coming from a known sender | Used to encrypt and decrypt data |
 
-| Key Pairs                                          |                    Single Key                    |
-| -------------------------------------------------- | :----------------------------------------------: |
-| This can be used to derive a secret and public key | This can only be either a secret or a public key |
+TODO: Not sure yet what to used for single key
 
-| Public                                                     |                          Secret                          |
-| ---------------------------------------------------------- | :------------------------------------------------------: |
-| This key should be made public and is used to encrypt data | This key must be kept secret and is used to decrypt data |
+| Key Pairs                                                               |                                          Single Key                                           |
+| ----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------: |
+| Used to derive both the secret and public key for asymmetric encryption | Is either a secret or a public key \ Same key used to encrypt and decrypt data i.e. symmetric |
 
-| Get App                                              | Generate                          |                   From Raw                   |
-| ---------------------------------------------------- | --------------------------------- | :------------------------------------------: |
-| Generates the key from the user and application data | Generates a new key pair randomly | Generates a new key from a given string this |
+| Public                                         |                           Secret                           |
+| ---------------------------------------------- | :--------------------------------------------------------: |
+| A key made public that is used to encrypt data | A key that must be kept secret and is used to decrypt data |
 
-| Encrypted                                                |                                              Encrypted Sealed                                              |
-| -------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------: |
-| This data is just encrypted with a public encryption key | This data is encrypted with a public encryption key and then encrypted again with a string called a cipher |
+| Get App                                              | Generate                          |                From Raw                 |
+| ---------------------------------------------------- | --------------------------------- | :-------------------------------------: |
+| Generates the key from the user and application data | Generates a new key pair randomly | Generates a new key from a given string |
+
+| Encrypted                                        |                                                 Encrypted Sealed                                                 |
+| ------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------: |
+| Data just encrypted with a public encryption key | This data is encrypted with a public encryption key and then encrypted again with a given string called a cipher |
 
 ## Domain Name System (DNS)
 
