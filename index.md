@@ -12,7 +12,7 @@ SAFE API Documentation
 
 Documentation and explanations of the SAFE Network by the community:
 
-* [The SAFE Network Primer]
+* [The SAFE Network Primer](https://maidsafe.net/docs/Safe%20Network%20Primer.pdf)
 * [SAFE Network Architecture ](https://safe-network-explained.github.io/architecture)
 * [The Documentation Topic ](https://safenetforum.org/t/the-documentation-topic/16149)
 * [Introduction to the SAFE Network ](https://medium.com/@luandro/introduction-to-the-safe-network-33d8641b2dee)
@@ -77,7 +77,7 @@ TODO: Needs to be verified
 
 The Mutable Data on the SAFE Network is saved as a key-value store. This means requested data from the network will
 return something like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these
-entries.
+entries. Entries can be inserted, updated or removed.
 
 A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
 
@@ -86,13 +86,24 @@ input such as an array or string and its type tag.
 
 There are two types of Mutable Data Structures: Public (websites) and Private (private files).
 
-Mutable Data Structures support: inserting, mutating and setting permissions.
+Mutable Data Structures support: inserting entries, mutating entries and setting permissions.
 
 ### Type Tags
 
 A type tag is a number that is used to differentiate between the different levels of the Mutable Data Structures. This
 means that two of the same hashes can reference different Mutable Data Structures if they use different type tags.
-Please note the type tags 0-10,000 are reserved by MaidSafe.
+
+The type tags 0-10,000 are **reserved by MaidSafe**.
+
+The following type tags are currently in use in Alpha 2:
+
+| Type tag |     Service     |
+| -------- | :-------------: |
+| 15001    |    Public ID    |
+| 15002    |  Service Name   |
+| 15003    |    Email ID     |
+| 15004    |  Email Archive  |
+| 54321    | A Safey website |
 
 RFC: [Reserved Names](https://github.com/maidsafe/rfcs/blob/master/text/0003-reserved-names/0003-reserved-names.md)
 
@@ -133,17 +144,18 @@ Mutable Data Structures can have permissions set to them. This means you can ena
 
 TODO: Needs to be verified
 
-Immutable Data holds a single value. Its size is only limited by the current Test Network/Alpha 2 restrictions or when
-the network is fully released the amount of SAFE Coin you have.
+The Immutable Data’s address on the network
+is derived from the hash of its file content. This means the file cannot be edited in any way after it
+has been uploaded as any change to the file would alter the hash.
 
-Immutable Data can be stored as: asymmetric encryption (Two people, email) symmetric encryption (one person, private
-files), and plaintext (websites).
+Immutable Data holds a single value and is also limited to 1 MB. It is possible to store files larger than 1 MB by splitting up the file into chunks with those
+chunks stored as separate Immutable Data entities. They can then be retrieved using a data map which can keep track of the Immutable Data’s addresses on the network.
 
-Immutable Data is retrieved with a Data Map Address. A Data Map Address is the 32 length hash of a particular Immutable
-Data file content.
+Immutable Data can be stored as:
 
-Since the Immutable Data's address is also a hash of its file content the file cannot be changed in any way and must
-remain static unlike Mutable Data.
+* Plain - Data will not be encrypted.
+* Symmetric - Data is encrypted with a symmetric key.
+* Asymmetric - Data is encrypted using a key pair.
 
 ### Cipher Opt
 
@@ -154,25 +166,6 @@ Immutable Data can be saved using Symmetric or Asymmetric encryption or Plain Te
 | Symmetric                                                             | Asymmetric                                                            |                                Plain Text                                |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------------------------------------------------------------: |
 | Only for user who made the data and uses only a single encryption key | Can be used for more than one person and uses a secret and public key | This data is in plain form for all who know the Immutable Data's Address |
-
-<!-- This is done by using XOR. -->
-
-<!-- #### Exclusive Or (XOR)
-
-//Needs to be explained better, why it's used, how it works and verified to be make sure it's right // This is a good reference <https://blog.maidsafe.net/2016/05/27/structuring-networks-with-xor/> for XOR on vaults and clients.
-
-I'll like to think of XOR (⊕) as the numbers canceling each other out. 0 is nothing so 0 canceling 0 is also nothing. 1 against 0, 0 is still nothing so 1 wins. 1 and 1 equal each other, therefore when they cancel each other out you are left with nothing, 0.
-
-| A | B | C |
-| - | - | - |
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 0 |
-
-##### A ⊕ B (The XOR distance of A and B) == C
-
-// Need To Detail : location, Commutative(A ⊕ B == B ⊕ A == C), unique identity with 2 closest nodes, ability to reverse equation(A ⊕ C == B),distributed hash tables, collision, differences between Mutable Data, Immutable Data and Vaults. -->
 
 ## Network File Storage (NFS)
 
@@ -194,53 +187,6 @@ to separate the subdirectory and the file name.
 
 This means the key of a Mutable Data Structure containing files would look something like this:
 `filepath/subdir/index.html`.
-
-## Containers
-
-Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores
-music and sound files.
-
-[More info about containers here](https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md)
-
-### Root Container
-
-TODO: Could be made simpler
-
-The root container is the main entry point for the user and apps to interact with. It is a locally encrypted container
-stored at a random location on the network known only to the user, that generally only the authenticator has write
-access to.
-
-Its reference will be stored in the users session packet on account creation. Keys starting with an underscore ( \_ )
-are reserved for internal usage by the authenticator, while the authenticator may also allow the creation of other keys
-later.
-
-The authenticator has another mapped data container which holds the encryption keys per each container, which is locally
-encrypted with a separate key that only the authenticator has access to and will never be shared. This is called:
-`RootKeysContainer`.
-
-#### Session Packet
-
-TODO
-
-### Default containers
-
-The authenticator will create the following default containers within the root container when you create an account:
-
-* `_apps/net.maidsafe.authenticator/`
-* `_documents`
-* `_downloads`
-* `_music`
-* `_pictures`
-* `_videos`
-* `_public`
-* `_publicNames`
-
-All data stored in these containers are stored randomly on the Network should be encrypted other than `_public`.
-
-### App container
-
-The app container is created for websites if they request their to have own container with their ID being used to
-identify it. This means the app container name looks like `apps/id.example.net`.
 
 ## Cryptography
 
@@ -282,15 +228,73 @@ TODO: Not sure yet what to used for single key
 | ------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------: |
 | Data just encrypted with a public encryption key | This data is encrypted with a public encryption key and then encrypted again with a given string called a cipher |
 
-## Domain Name System (DNS)
+## Containers
+
+Containers are Mutable Data Structures that are generally used for storing particular types of data i.e. `_music` stores
+music and sound files.
+
+[More info about containers here](https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md)
+
+### Root Container
+
+TODO: Could be made simpler
+
+The root container is the main entry point for the user and apps to interact with. It is a locally encrypted container
+stored at a random location on the network known only to the user, that generally only the authenticator has write
+access to.
+
+Its reference will be stored in the users session packet on account creation. Keys starting with an underscore ( \_ )
+are reserved for internal usage by the authenticator, while the authenticator may also allow the creation of other keys
+later.
+
+The authenticator has another mapped data container which holds the encryption keys per each container, which is locally
+encrypted with a separate key that only the authenticator has access to and will never be shared. This is called:
+`RootKeysContainer`.
+
+#### Session Packet
+
+TODO
+
+### Default containers
+
+The authenticator will create the following default containers within the root container when you create an account:
+
+* `_apps/net.maidsafe.authenticator/`
+* `_documents`
+* `_downloads`
+* `_music`
+* `_pictures`
+* `_videos`
+* `_public`
+* `_publicNames`
+
+All data stored in these containers are stored randomly on the Network and should be encrypted. There are two
+special cases, `_public` - to
+store unencrypted data (the
+container is encrypted even
+if its contents are not), and `_ publicNames` - to store Public
+IDs which can be looked up for
+public information.
+
+### App container
+
+The app container is created for websites if they request their to have own container with their ID being used to
+identify it. This means the app container name looks like `apps/id.example.net`.
+
+## Decentralised Naming System (DNS)
 
 TODO: Explain thoroughly
-
-DNS is the method websites are located on the SAFE Network using SAFE URLs. A SAFE URL consists of a URL that looks like
-this: `safe://servicename.publicid`.
-
-It works by using Mutable Data to locate stored NFS files. The Web Hosting Manager and SAFE Browser Overviews below go
+The Web Hosting Manager and SAFE Browser Overviews below go
 into more detail of how DNS works.
+
+DNS is the method websites are located on the SAFE Network using SAFE URLs. A SAFE URL is a human-readable address that looks like:
+`safe://servicename.publicid`. We'll be using this as the example SAFE URL.
+
+On the SAFE Network the DNS takes
+a hash of `publicid`. The browser uses this hash as the address to find the corresponding Mutable Data Structure which contains a key equal to `servicename`.
+
+The value for this entry is a Mutable Data Name. The browser uses that Mutable Data Name with the
+type tag of 15002 to get a new Mutable Data Structure containing our website and all its files.
 
 ## Mechanics of SAFE Applications
 
