@@ -229,7 +229,7 @@ music and sound files.
 
 [More info about containers here](https://github.com/maidsafe/rfcs/blob/master/text/0046-new-auth-flow/containers.md)
 
-### Root Container
+<!-- ### Root Container
 
 TODO: Could be made simpler
 
@@ -247,7 +247,7 @@ encrypted with a separate key that only the authenticator has access to and will
 
 #### Session Packet
 
-TODO
+TODO -->
 
 ### Default containers
 
