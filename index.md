@@ -76,7 +76,7 @@ change).
 TODO: Needs to be verified
 
 The Mutable Data on the SAFE Network is saved as a key-value store. This means requested data from the network will
-return something like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these
+return an entry like this `key 1: value 1`. This is called an entry. A Mutable Data Structure is composed of these
 entries. Entries can be inserted, updated or removed.
 
 A Mutable Data Structure can hold up to a 1000 entries and contain a maximum of 1 MB of data.
@@ -151,21 +151,15 @@ has been uploaded as any change to the file would alter the hash.
 Immutable Data holds a single value and is also limited to 1 MB. It is possible to store files larger than 1 MB by splitting up the file into chunks with those
 chunks stored as separate Immutable Data entities. They can then be retrieved using a data map which can keep track of the Immutable Data’s addresses on the network.
 
-Immutable Data can be stored as:
-
-* Plain - Data will not be encrypted.
-* Symmetric - Data is encrypted with a symmetric key.
-* Asymmetric - Data is encrypted using a key pair.
-
 ### Cipher Opt
 
 TODO: Needs to be verified
 
-Immutable Data can be saved using Symmetric or Asymmetric encryption or Plain Text.
+Immutable Data can be stored as:
 
-| Symmetric                                                             | Asymmetric                                                            |                                Plain Text                                |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------------------------------------------------------------: |
-| Only for user who made the data and uses only a single encryption key | Can be used for more than one person and uses a secret and public key | This data is in plain form for all who know the Immutable Data's Address |
+| Symmetric                                                             | Asymmetric                                                            |                                       Plain Text                                        |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | :-------------------------------------------------------------------------------------: |
+| Only for user who made the data and uses only a single encryption key | Can be used for more than one person and uses a secret and public key | This data is not encrypted and accessible for all who know the Immutable Data's Address |
 
 ## Network File Storage (NFS)
 
@@ -185,7 +179,7 @@ in the entry's value. This Mutable Data Structure can be used again to store mor
 When dealing with folders and files being uploaded that are within subdirectories it is recommended to use a slash (/)
 to separate the subdirectory and the file name.
 
-This means the key of a Mutable Data Structure containing files would look something like this:
+This means the key of a Mutable Data Structure containing files looks like this:
 `filepath/subdir/index.html`.
 
 ## Cryptography
@@ -210,7 +204,7 @@ This is a random number that is generated for once off purposes. It is used in c
 | ---------------------------------------------- | :------------------------------: |
 | Used to verify data coming from a known sender | Used to encrypt and decrypt data |
 
-TODO: Not sure yet what to used for single key
+TODO: Not sure yet what to do for single key
 
 | Key Pairs                                                               |                                          Single Key                                           |
 | ----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------: |
@@ -296,7 +290,7 @@ a hash of `publicid`. The browser uses this hash as the address to find the corr
 The value for this entry is a Mutable Data Name. The browser uses that Mutable Data Name with the
 type tag of 15002 to get a new Mutable Data Structure containing our website and all its files.
 
-## Mechanics of SAFE Applications
+## Mechanics of SAFE Applications and Websites
 
 ### How do MaidSafe's Applications work?
 
@@ -336,7 +330,7 @@ error.
 
 #### SAFE Email App
 
-### How do my websites work?
+### How do the Safey websites work?
 
 #### Demoy
 
